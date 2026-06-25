@@ -34,18 +34,10 @@ function filterHeaders(headers) {
 module.exports = (req, res) => {
   // Vercel passes the original path via ?p= query param from the rewrite rule
   // Fall back to the raw URL path if query param is missing
-  let targetPath = '/'
-  if (req.query && req.query.p) {
-    targetPath = '/' + req.query.p
-    // Preserve any additional query string from the original request
-    const qs = req.query.qs || ''
-    if (qs) targetPath += '?' + qs
-  } else if (req.url) {
-    // Strip /api/proxy prefix if it leaked through
-    targetPath = req.url.replace(/^\/api\/proxy/, '') || '/'
-    // Strip the ?p= param itself from the target
-    targetPath = targetPath.replace(/\?p=.*$/, '') || '/'
-  }
+  // Get the original path from Vercel's rewrite query param
+  // p="" → root, p="pricing" → /pricing, p="pricing/features" → /pricing/features
+  const p = (req.query && req.query.p != null) ? String(req.query.p) : ''
+  const targetPath = p ? '/' + p.replace(/^\/+/, '') : '/'
 
   const options = {
     hostname: 'midday.ai',

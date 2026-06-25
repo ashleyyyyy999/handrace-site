@@ -4,6 +4,7 @@
     { "source": "/_next/:path*",   "destination": "https://midday.ai/_next/:path*"   },
     { "source": "/cdn-cgi/:path*", "destination": "https://midday.ai/cdn-cgi/:path*" },
     { "source": "/images/:path*",  "destination": "https://midday.ai/images/:path*"  },
-    { "source": "/:path*",         "destination": "/api/proxy?p=:path*"              }
+    { "source": "/",               "destination": "/api/proxy?p="                    },
+    { "source": "/:path+",         "destination": "/api/proxy?p=:path+"              }
   ]
 }
