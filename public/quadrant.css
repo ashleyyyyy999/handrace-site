@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'Quadrant';
+  src: url('/Quadrant.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-hedvig-sans: 'Quadrant', system-ui, sans-serif !important;
+  --font-hedvig-serif: 'Quadrant', system-ui, sans-serif !important;
+}
+
+html, body, * {
+  font-family: 'Quadrant', system-ui, sans-serif !important;
+}
