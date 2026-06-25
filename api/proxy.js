@@ -18,6 +18,7 @@ const BLOCKED_RESPONSE_HEADERS = new Set([
   'content-security-policy',
   'x-frame-options',
   'transfer-encoding',
+  'content-encoding', // Node fetch() auto-decompresses; forwarding this header causes ERR_CONTENT_DECODING_FAILED
   'content-length',
   'connection',
   'keep-alive',
