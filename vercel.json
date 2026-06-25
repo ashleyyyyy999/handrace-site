@@ -3,6 +3,7 @@
   "routes": [
     { "handle": "filesystem" },
     { "src": "/", "dest": "/www.amplemarket.com/index.html" },
+    { "src": "/(.+\\.html)$", "dest": "/www.amplemarket.com/$1" },
     { "src": "/(.*)", "dest": "/www.amplemarket.com/$1.html" }
   ]
 }
