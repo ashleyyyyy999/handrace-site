@@ -1,15 +1,9 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "api/proxy.js", "use": "@vercel/node" },
-    { "src": "public/**",    "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/Quadrant.woff2",    "dest": "/public/Quadrant.woff2" },
-    { "src": "/quadrant.css",       "dest": "/public/quadrant.css"   },
-    { "src": "/_next/(.*)",         "dest": "https://midday.ai/_next/$1" },
-    { "src": "/cdn-cgi/(.*)",       "dest": "https://midday.ai/cdn-cgi/$1" },
-    { "src": "/images/(.*)",        "dest": "https://midday.ai/images/$1" },
-    { "src": "/(.*)",               "dest": "/api/proxy?p=$1" }
+  "rewrites": [
+    { "source": "/_next/:path*",   "destination": "https://midday.ai/_next/:path*"   },
+    { "source": "/cdn-cgi/:path*", "destination": "https://midday.ai/cdn-cgi/:path*" },
+    { "source": "/images/:path*",  "destination": "https://midday.ai/images/:path*"  },
+    { "source": "/:path*",         "destination": "/api/proxy?p=:path*"              }
   ]
 }
