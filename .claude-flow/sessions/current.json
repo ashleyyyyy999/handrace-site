@@ -4,9 +4,10 @@
   "cwd": "/Users/dresdenlorenzo/Desktop/Colosseum/ultraclaude/handrace-site",
   "context": {},
   "metrics": {
-    "edits": 8,
+    "edits": 10,
     "commands": 0,
     "tasks": 0,
     "errors": 0
-  }
+  },
+  "restoredAt": "2026-06-25T12:50:29.934Z"
 }

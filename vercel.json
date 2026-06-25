@@ -2,9 +2,7 @@
   "version": 2,
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/_next/(.*)",   "dest": "https://midday.ai/_next/$1"   },
-    { "src": "/cdn-cgi/(.*)", "dest": "https://midday.ai/cdn-cgi/$1" },
-    { "src": "/images/(.*)",  "dest": "https://midday.ai/images/$1"  },
-    { "src": "/(.*)",          "dest": "/api/proxy?p=$1"              }
+    { "src": "/", "dest": "/www.amplemarket.com/index.html" },
+    { "src": "/(.*)", "dest": "/www.amplemarket.com/$1.html" }
   ]
 }
