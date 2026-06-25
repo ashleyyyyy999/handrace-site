@@ -43,17 +43,36 @@ function filterResponseHeaders(headers) {
   return out
 }
 
+const INJECT_SCRIPT = `<script>
+(function(){
+  // Rewrite absolute midday.ai URLs to relative so they go through this proxy
+  // (avoids CORS errors when midday's React components fetch their own API)
+  var _origFetch = window.fetch;
+  window.fetch = function(input, init) {
+    try {
+      var url = input instanceof Request ? input.url : String(input);
+      if (url.indexOf('https://midday.ai') === 0) {
+        url = url.slice('https://midday.ai'.length) || '/';
+        input = input instanceof Request ? new Request(url, input) : url;
+      }
+    } catch(e) {}
+    return _origFetch.apply(this, [input, init]);
+  };
+  // Inject Quadrant font after hydration so React never sees it as a mismatch
+  document.addEventListener('DOMContentLoaded', function() {
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = '/quadrant.css';
+    document.head.appendChild(l);
+  });
+})();
+</script>`
+
 function injectFont(html) {
-  // Inject font override right before </body> so React's head hydration is unaffected
-  const fontLink = '<link rel="stylesheet" href="/quadrant.css"/>'
-  if (html.includes('</body>')) {
-    return html
-      .replace('</body>', fontLink + '</body>')
-      .replace(/<meta[^>]*Content-Security-Policy[^>]*>/gi, '')
-  }
-  // Fallback: before </html>
+  // Inject our script FIRST in <head> so fetch is patched before React runs
+  // The script dynamically appends the font link after DOMContentLoaded
   return html
-    .replace('</html>', fontLink + '</html>')
+    .replace(/<head>/i, '<head>' + INJECT_SCRIPT)
     .replace(/<meta[^>]*Content-Security-Policy[^>]*>/gi, '')
 }
 
