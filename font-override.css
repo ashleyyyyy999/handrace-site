@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "Quadrant";
+  src: url("/Quadrant.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Labil Grotesk Variable";
+  src: url("/Quadrant.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+*, *::before, *::after,
+body, h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, li, nav {
+  font-family: "Quadrant", Arial, sans-serif !important;
+}
